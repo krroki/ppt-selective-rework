@@ -1,0 +1,13 @@
+jobs/
+outputs/
+node_modules/
+*.log
+.playwright-mcp/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+/fullscreen-triage-slide-*.png
+Thumbs.db
+.DS_Store

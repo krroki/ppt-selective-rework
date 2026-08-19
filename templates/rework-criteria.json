@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "name": "Selective PPT rework rubric",
+  "source": {
+    "title": "작업별 PPT 디자인 기준",
+    "url": null,
+    "reviewedAt": null,
+    "evidenceMessageIndexes": [],
+    "summary": "새 작업을 만들 때 실제 기준 출처와 검토 이력을 기록합니다."
+  },
+  "classification": {
+    "principle": "장식이 적다는 이유가 아니라 발표 화면에서 내용 전달이 실패하는 페이지만 재작업합니다.",
+    "keepRule": "핵심 문구와 근거가 발표 거리에서 읽히고 위계와 문맥이 분명하면 단순한 디자인이어도 유지합니다.",
+    "uncertainRule": "원본 참조가 없거나 실제 판독 가능성을 확인할 수 없으면 판단 필요로 둡니다.",
+    "criteria": [
+      {
+        "id": "TRIAGE-READABILITY",
+        "label": "원거리 가독성",
+        "description": "핵심 문구, 수치, 캡처의 실질 정보가 발표 거리에서 읽히지 않습니다."
+      },
+      {
+        "id": "TRIAGE-DENSITY",
+        "label": "정보 과밀",
+        "description": "한 화면에 장문, 다열 목록 또는 여러 증빙이 몰려 빠르게 훑을 수 없습니다."
+      },
+      {
+        "id": "TRIAGE-HIERARCHY",
+        "label": "위계·흐름",
+        "description": "제목, 핵심, 근거의 우선순위나 단계·화살표 흐름이 즉시 파악되지 않습니다."
+      },
+      {
+        "id": "TRIAGE-INTEGRITY",
+        "label": "잘림·흐림",
+        "description": "필요한 문구나 오브젝트가 잘렸거나 흐려서 근거를 온전히 확인할 수 없습니다."
+      },
+      {
+        "id": "TRIAGE-CONTEXT",
+        "label": "문맥 전달",
+        "description": "질문, 주의, 실습, 과정, 후킹 등 이 장의 역할이 시각적으로 바로 읽히지 않습니다."
+      },
+      {
+        "id": "TRIAGE-REFERENCE",
+        "label": "원본 미확인",
+        "description": "현재 원본 렌더가 없어 실제 배치와 판독 가능성을 검증할 수 없습니다."
+      }
+    ]
+  },
+  "reworkContract": {
+    "principle": "선택된 페이지는 원본을 편집 기준으로 삼아 내용은 잠그고 전달력만 개선합니다.",
+    "criteria": [
+      {
+        "id": "LOCK-CONTENT",
+        "label": "원문·증거 보존",
+        "description": "문구, 숫자, 출처, 사진, 로고, 기존 일러스트와 의도된 강조를 삭제하거나 바꾸지 않습니다."
+      },
+      {
+        "id": "LOCK-REFERENCE",
+        "label": "원본 기반 편집",
+        "description": "현재 슬라이드를 편집 기준으로 사용하고 내용과 무관한 대체 이미지를 새로 만들지 않습니다."
+      },
+      {
+        "id": "LOCK-FORMAT",
+        "label": "16:9 · 1920×1080",
+        "description": "모든 시안과 승인본은 16:9, 1920×1080 규격을 유지합니다."
+      },
+      {
+        "id": "LOCK-TYPE",
+        "label": "본문 40pt 원칙",
+        "description": "핵심 문구와 본문은 40pt 이상을 기본으로 하며, 장문·증빙은 축소 대신 분할 또는 확대 인셋으로 해결합니다."
+      },
+      {
+        "id": "LOCK-COLOR",
+        "label": "확정 색상 고정",
+        "description": "작업 시작 전에 확정한 프라이머리 컬러만 일관되게 사용하고 기존 의미 색상은 보존합니다."
+      },
+      {
+        "id": "LOCK-CONTEXT",
+        "label": "문구 맞춤 요소",
+        "description": "문구를 꼼꼼히 읽고 의미에 맞는 아이콘, 프레임, 선만 최소한으로 추가합니다."
+      },
+      {
+        "id": "LOCK-DENSITY",
+        "label": "밀도 한 단계 개선",
+        "description": "빈약함은 보완하되 장식을 겹쳐 새 과밀을 만들지 않는 선에서 디자인 밀도를 한 단계 높입니다."
+      },
+      {
+        "id": "LOCK-GEOMETRY",
+        "label": "정렬·선 품질",
+        "description": "화살표와 선의 굵기, 간격, 방향을 통일하고 번짐, 잘림, 어색한 연결부를 허용하지 않습니다."
+      }
+    ]
+  },
+  "style": {
+    "primaryCandidate": null,
+    "primaryConfirmed": false,
+    "note": "프라이머리 컬러는 각 작업에서 후보를 다시 확인하고 승인 후 고정합니다."
+  }
+}

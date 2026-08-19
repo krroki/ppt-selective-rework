@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>PPT Proofing Desk</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <header class="masthead">
+      <div>
+        <p class="eyebrow">PPT SELECTIVE REWORK / PROOFING DESK</p>
+        <h1 id="project-title">작업을 불러오는 중</h1>
+      </div>
+      <div class="deck-facts" id="deck-facts"></div>
+    </header>
+
+    <main>
+      <section class="status-rail" aria-label="검수 진행률">
+        <div class="progress-copy">
+          <span id="progress-label">0 / 0 분류 완료</span>
+          <strong id="progress-percent">0%</strong>
+        </div>
+        <div class="progress-track"><span id="progress-fill"></span></div>
+        <div class="status-counts" id="status-counts"></div>
+      </section>
+
+      <nav class="mode-tabs" aria-label="작업 단계">
+        <button class="mode-tab is-active" data-tab="triage">01 페이지 분류</button>
+        <button class="mode-tab" data-tab="style">02 프라이머리 컬러</button>
+        <button class="mode-tab" data-tab="rework">03 Before / After 검수</button>
+      </nav>
+
+      <section id="triage-panel" class="panel is-active">
+        <div class="command-bar">
+          <div class="filter-group" id="status-filter" aria-label="상태 필터">
+            <button class="filter-chip is-active" data-filter="all">전체</button>
+            <button class="filter-chip" data-filter="unreviewed">미분류</button>
+            <button class="filter-chip" data-filter="keep">유지</button>
+            <button class="filter-chip" data-filter="rework">재작업</button>
+            <button class="filter-chip" data-filter="uncertain">판단 필요</button>
+          </div>
+          <button id="quick-triage-start" class="quick-triage-action" type="button"><span>전체화면 빠른 분류</span><kbd>←</kbd><kbd>→</kbd><kbd>SPACE</kbd></button>
+          <label class="search-control">
+            <span>슬라이드</span>
+            <input id="slide-search" inputmode="numeric" placeholder="예: 341" />
+          </label>
+        </div>
+
+        <section class="checked-overview" aria-labelledby="checked-overview-title">
+          <header>
+            <div>
+              <p class="eyebrow">REWORK CHECKLIST / LIVE</p>
+              <h2 id="checked-overview-title">재작업 체크 목록</h2>
+            </div>
+            <strong id="checked-slide-count" class="checked-overview-count">0장</strong>
+          </header>
+          <div id="checked-slide-list" class="checked-slide-list" aria-live="polite"></div>
+        </section>
+
+        <section id="criteria-board" class="criteria-board" aria-labelledby="criteria-title" hidden>
+          <header class="criteria-board-header">
+            <div>
+              <p class="eyebrow">AUDIT RUBRIC / ACTIVE</p>
+              <h2 id="criteria-title">분류·재작업 기준</h2>
+            </div>
+            <div id="criteria-provenance" class="criteria-provenance"></div>
+          </header>
+          <div class="criteria-columns">
+            <section class="criteria-column" aria-labelledby="classification-criteria-title">
+              <h3 id="classification-criteria-title">분류 기준</h3>
+              <div id="classification-policy" class="criteria-policy"></div>
+              <div id="classification-criteria" class="criteria-list"></div>
+            </section>
+            <section class="criteria-column criteria-column-output" aria-labelledby="rework-contract-title">
+              <h3 id="rework-contract-title">재작업 결과물 계약</h3>
+              <div id="rework-policy" class="criteria-policy"></div>
+              <div id="rework-contract" class="criteria-list"></div>
+            </section>
+          </div>
+          <section class="criteria-editor" aria-labelledby="rework-criteria-title">
+            <header class="criteria-editor-header">
+              <div>
+                <p class="eyebrow">MODIFICATION RULES / EDITABLE</p>
+                <h3 id="rework-criteria-title">수정 기준</h3>
+                <p>선택된 슬라이드를 다시 만들 때 반드시 지킬 기준입니다. 원문 링크를 열지 않아도 여기서 전체 내용을 확인하고 바로 편집할 수 있습니다.</p>
+              </div>
+              <div class="criteria-editor-actions">
+                <span id="rework-criteria-state" class="criteria-editor-state" aria-live="polite">기준 불러오는 중</span>
+                <button id="add-rework-criterion" class="criterion-add" type="button">+ 기준 추가</button>
+                <button id="save-rework-criteria" class="criterion-save" type="button">수정 기준 저장</button>
+              </div>
+            </header>
+            <div id="rework-criteria-editor-list" class="criteria-editor-list" aria-live="polite"></div>
+          </section>
+        </section>
+
+        <div class="notice" id="reference-notice" hidden></div>
+        <div id="slide-grid" class="slide-grid" aria-live="polite"></div>
+
+        <footer class="pager">
+          <button id="previous-page" class="pager-button">이전</button>
+          <span id="page-label">1 / 1</span>
+          <button id="next-page" class="pager-button">다음</button>
+          <button id="finalize-triage" class="primary-action">분류 확정</button>
+        </footer>
+      </section>
+
+      <section id="style-panel" class="panel">
+        <div class="style-intro">
+          <p class="eyebrow">COLOR LOCK</p>
+          <h2>프라이머리 컬러를 먼저 잠급니다.</h2>
+          <p>전체 슬라이드의 포인트 컬러 픽셀을 표본 추출했습니다. 후보를 선택하거나 직접 HEX 값을 입력하세요.</p>
+        </div>
+        <div id="palette-grid" class="palette-grid"></div>
+        <form id="style-form" class="style-form">
+          <label>Primary <input id="primary-color" value="#5EC1E8" pattern="#[0-9A-Fa-f]{6}" /></label>
+          <label>Background <input id="background-color" value="#FFFFFF" pattern="#[0-9A-Fa-f]{6}" /></label>
+          <label>Text <input id="text-color" value="#17212B" pattern="#[0-9A-Fa-f]{6}" /></label>
+          <label>Muted <input id="muted-color" value="#667085" pattern="#[0-9A-Fa-f]{6}" /></label>
+          <div class="style-preview" id="style-preview">
+            <span>PRIMARY</span>
+            <strong>시인성 우선</strong>
+            <small>선택한 컬러는 시안 승인 전까지 수정할 수 있습니다.</small>
+          </div>
+          <div class="style-actions">
+            <button type="button" id="save-style" class="secondary-action">임시 저장</button>
+            <button type="submit" class="primary-action">컬러 확정</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="rework-panel" class="panel">
+        <header class="rework-intro">
+          <div>
+            <p class="eyebrow">IMAGEGEN PROOF / VERSIONED REVIEW</p>
+            <h2>원본과 생성본을 한눈에 비교합니다.</h2>
+            <p>이미지를 클릭하면 원본 해상도로 확대됩니다. 반려 시 사유를 남기면 해당 버전은 보존되고 다음 버전 재작업 대기열에 들어갑니다.</p>
+          </div>
+          <div id="rework-summary" class="rework-summary" aria-label="재작업 검수 현황"></div>
+        </header>
+        <div class="rework-command-bar">
+          <div class="filter-group" aria-label="재작업 검수 상태 필터">
+            <button class="filter-chip rework-filter-chip is-active" data-rework-filter="all">전체</button>
+            <button class="filter-chip rework-filter-chip" data-rework-filter="pending">검수 대기</button>
+            <button class="filter-chip rework-filter-chip" data-rework-filter="approved">확정</button>
+            <button class="filter-chip rework-filter-chip" data-rework-filter="rejected">반려</button>
+            <button class="filter-chip rework-filter-chip" data-rework-filter="queued">생성 대기</button>
+          </div>
+          <p><strong>FACT LOCK</strong> 한글·숫자·로고·사진이 원본과 다르면 확정하지 않습니다.</p>
+        </div>
+        <div id="rework-grid" class="rework-grid" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <dialog id="image-lightbox" class="image-lightbox" aria-labelledby="lightbox-title" tabindex="-1">
+      <div class="lightbox-shell">
+        <header class="lightbox-header">
+          <div class="lightbox-heading">
+            <p id="lightbox-kicker" class="lightbox-kicker">SLIDE 001</p>
+            <h2 id="lightbox-title">슬라이드 원본</h2>
+            <p id="lightbox-meta" class="lightbox-meta"></p>
+          </div>
+          <div class="lightbox-navigation" aria-label="슬라이드 이동">
+            <button id="lightbox-prev" type="button">← 이전</button>
+            <strong id="lightbox-position">1 / 1</strong>
+            <button id="lightbox-next" type="button">다음 →</button>
+          </div>
+          <button id="lightbox-rework-toggle" class="lightbox-rework-toggle" type="button" hidden><span id="lightbox-rework-state">재작업 체크</span><kbd>SPACE</kbd></button>
+          <button id="lightbox-close" class="lightbox-close" type="button" aria-label="원본 크게 보기 닫기">닫기 <kbd>ESC</kbd></button>
+        </header>
+
+        <div class="lightbox-stage">
+          <div id="lightbox-canvas" class="lightbox-canvas">
+            <div class="lightbox-canvas-inner">
+              <div id="lightbox-frame" class="lightbox-frame">
+                <img id="lightbox-image" class="lightbox-image is-fit" alt="" />
+                <div id="lightbox-missing" class="lightbox-missing" hidden></div>
+              </div>
+            </div>
+          </div>
+          <aside id="lightbox-check-panel" class="lightbox-check-panel" aria-labelledby="lightbox-check-title" hidden>
+            <header>
+              <div><span>CHECKED</span><h3 id="lightbox-check-title">재작업 목록</h3></div>
+              <strong id="lightbox-checked-count">0</strong>
+            </header>
+            <p>체크된 번호를 누르면 바로 이동합니다.</p>
+            <div id="lightbox-checked-list" class="lightbox-checked-list"></div>
+          </aside>
+        </div>
+
+        <footer class="lightbox-toolbar" aria-label="이미지 확대 제어">
+          <span class="lightbox-tip"><kbd>←</kbd><kbd>→</kbd> 슬라이드 이동 · <kbd>SPACE</kbd> 재작업 체크/해제 · 더블클릭 100%</span>
+          <div class="lightbox-zoom-controls">
+            <button id="lightbox-fit" class="is-active" type="button">화면 맞춤</button>
+            <button id="lightbox-zoom-out" type="button" aria-label="축소">−</button>
+            <output id="lightbox-zoom-label">화면 맞춤</output>
+            <button id="lightbox-zoom-in" type="button" aria-label="확대">＋</button>
+          </div>
+        </footer>
+      </div>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
